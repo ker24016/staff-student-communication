@@ -1,4 +1,4 @@
-package com.byui.studentstaffcommunication.respoitory;
+package com.byui.studentstaffcommunication.repository;
 
 import com.byui.studentstaffcommunication.model.Post;
 import org.springframework.data.domain.Pageable;

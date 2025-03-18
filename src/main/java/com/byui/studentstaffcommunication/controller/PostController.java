@@ -1,7 +1,7 @@
 package com.byui.studentstaffcommunication.controller;
 
 import com.byui.studentstaffcommunication.model.Post;
-import com.byui.studentstaffcommunication.respoitory.PostRepository;
+import com.byui.studentstaffcommunication.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
