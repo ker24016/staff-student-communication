@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/post")
 public class PostController {
     public PostRepository postRepository;
 
@@ -18,12 +18,12 @@ public class PostController {
         this.postRepository = postRepository;
     }
 
-    @GetMapping("/post/{id}")
+    @GetMapping("/{id}")
     public Post getPostById(@PathVariable String id) {
         return postRepository.findById(id).orElse(null);
     }
 
-    @GetMapping("post/{id}/replies")
+    @GetMapping("/{id}/replies")
     public List<Post> getPostByChildren(@PathVariable String id, @RequestParam(required = false) Integer count, @RequestParam(required = false) Integer page) {
         if (count == null) {
             count = 10;
@@ -34,7 +34,7 @@ public class PostController {
         return postRepository.findByParentId(id, Pageable.ofSize(count).withPage(page));
     }
 
-    @GetMapping("/author/{id}/posts")
+    @GetMapping("/author/{id}")
     public List<Post> getPostsByAuthor(@PathVariable String id, @RequestParam(required = false) Integer count, @RequestParam(required = false) Integer page) {
         if (count == null) {
             count = 10;
