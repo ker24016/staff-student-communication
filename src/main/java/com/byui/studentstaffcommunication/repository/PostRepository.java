@@ -9,7 +9,10 @@ import java.util.List;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, String> {
-    List<Post> findByAuthorId(String authorId, Pageable pageable);
-    List<Post> findByParentId(String parentId, Pageable pageable);
-    List<Post> findByTitleContainingIgnoreCase(String title, Pageable pageable);
+    List<Post> findAllByAuthorId(String authorId, Pageable pageable);
+    List<Post> findAllByParentId(String parentId, Pageable pageable);
+    List<Post> findAllByTitleContainingIgnoreCase(String title, Pageable pageable);
+    List<Post> findAllByAuthorIdContainingIgnoreCaseOrTitleContainingIgnoreCaseOrContentContainingIgnoreCase(String authorId, String title, String content, Pageable pageable);
+
+    List<Post> findAllByParent(Post parent, Pageable pageable);
 }

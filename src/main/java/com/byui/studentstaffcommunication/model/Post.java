@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @Table(name = "posts")
@@ -17,6 +19,12 @@ public class Post {
     protected String id;
     protected String title;
     protected String content;
-    protected String authorId;
-    protected String parentId;
+    @ManyToOne
+    @JoinColumn(name = "author_id", referencedColumnName = "id", nullable = false)
+    protected User author;
+    @ManyToOne
+    @JoinColumn(name = "parent_id", referencedColumnName = "id")
+    protected Post parent;
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
+    protected List<Post> children;
 }
