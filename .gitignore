@@ -56,4 +56,7 @@ build/
 hs_err_pid*
 replay_pid*
 
+# Secret stuff
 .env
+db.mv.db
+db.trace.db
