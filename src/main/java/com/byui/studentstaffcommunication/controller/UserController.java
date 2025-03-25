@@ -30,4 +30,9 @@ public class UserController {
                                                   @RequestParam(defaultValue = "10") int size) {
         return ResponseEntity.ok(userRepository.getAllByNameContainingIgnoreCase(name, Pageable.ofSize(size).withPage(page)));
     }
+
+    @PostMapping("/create")
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        return ResponseEntity.ok(userRepository.save(user));
+    }
 }
