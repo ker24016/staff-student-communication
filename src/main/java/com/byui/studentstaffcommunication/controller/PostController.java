@@ -24,6 +24,12 @@ public class PostController {
         return ResponseEntity.ok(postRepository.save(post));
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<Post>> getAllPosts(@RequestParam(defaultValue = "10") Integer count,
+                                                  @RequestParam(defaultValue = "0") Integer page) {
+        return ResponseEntity.ok(postRepository.findAll(Pageable.ofSize(count).withPage(page)).stream().toList());
+    }
+
     @GetMapping("/{id}/replies")
     public ResponseEntity<List<Post>> getPostByChildren(@PathVariable Long id,
                                                         @RequestParam(defaultValue = "10") int count,
