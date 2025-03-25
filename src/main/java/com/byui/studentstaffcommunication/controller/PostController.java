@@ -20,12 +20,12 @@ public class PostController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Post> getPostById(@PathVariable String id) {
+    public ResponseEntity<Post> getPostById(@PathVariable Long id) {
         return ResponseEntity.of(postRepository.findById(id));
     }
 
     @GetMapping("/{id}/replies")
-    public ResponseEntity<List<Post>> getPostByChildren(@PathVariable String id,
+    public ResponseEntity<List<Post>> getPostByChildren(@PathVariable Long id,
                                         @RequestParam(defaultValue = "10") int count,
                                         @RequestParam(defaultValue = "0") int page) {
         return ResponseEntity.ok(postRepository.findAllByParent(postRepository.findById(id).orElseThrow(), Pageable.ofSize(count).withPage(page)));
