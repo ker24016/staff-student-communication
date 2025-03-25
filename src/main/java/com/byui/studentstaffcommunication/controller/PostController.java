@@ -19,22 +19,41 @@ public class PostController {
         this.postRepository = postRepository;
     }
 
+    @PostMapping("/create")
+    public ResponseEntity<Post> createPost(@RequestBody Post post) {
+        return ResponseEntity.ok(postRepository.save(post));
+    }
+
+    @GetMapping("/{id}/replies")
+    public ResponseEntity<List<Post>> getPostByChildren(@PathVariable Long id,
+                                                        @RequestParam(defaultValue = "10") int count,
+                                                        @RequestParam(defaultValue = "0") int page) {
+        return ResponseEntity.ok(postRepository.findAllByParent(postRepository.findById(id).orElseThrow(), Pageable.ofSize(count).withPage(page)));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Post> getPostById(@PathVariable Long id) {
         return ResponseEntity.of(postRepository.findById(id));
     }
 
-    @GetMapping("/{id}/replies")
-    public ResponseEntity<List<Post>> getPostByChildren(@PathVariable Long id,
-                                        @RequestParam(defaultValue = "10") int count,
-                                        @RequestParam(defaultValue = "0") int page) {
-        return ResponseEntity.ok(postRepository.findAllByParent(postRepository.findById(id).orElseThrow(), Pageable.ofSize(count).withPage(page)));
+    @GetMapping("/search/all")
+    public ResponseEntity<List<Post>> searchPosts(@RequestParam(defaultValue = "") String query,
+                                                  @RequestParam(defaultValue = "10") Integer count,
+                                                  @RequestParam(defaultValue = "0") Integer page) {
+        return ResponseEntity.ok(postRepository.findAllByAuthorIdContainingIgnoreCaseOrTitleContainingIgnoreCaseOrContentContainingIgnoreCase(query, query, query, Pageable.ofSize(count).withPage(page)));
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<List<Post>> getPostsByAuthor(@RequestParam(defaultValue = "") String query,
-                                                      @RequestParam(defaultValue = "10") Integer count,
-                                                      @RequestParam(defaultValue = "0") Integer page) {
-        return ResponseEntity.ok(postRepository.findAllByAuthorIdContainingIgnoreCaseOrTitleContainingIgnoreCaseOrContentContainingIgnoreCase(query, query, query, Pageable.ofSize(count).withPage(page)));
+    @GetMapping("/search/content")
+    public ResponseEntity<List<Post>> searchPostsByContent(@RequestParam(defaultValue = "") String query,
+                                                           @RequestParam(defaultValue = "10") Integer count,
+                                                           @RequestParam(defaultValue = "0") Integer page) {
+        return ResponseEntity.ok(postRepository.findAllByContentContainingIgnoreCase(query, Pageable.ofSize(count).withPage(page)));
+    }
+
+    @GetMapping("/search/title")
+    public ResponseEntity<List<Post>> searchPostsByTitle(@RequestParam(defaultValue = "") String query,
+                                                         @RequestParam(defaultValue = "10") Integer count,
+                                                         @RequestParam(defaultValue = "0") Integer page) {
+        return ResponseEntity.ok(postRepository.findAllByTitleContainingIgnoreCase(query, Pageable.ofSize(count).withPage(page)));
     }
 }
