@@ -5,18 +5,23 @@ import com.byui.studentstaffcommunication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    public UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+
 
     @Autowired
-    public UserController(UserRepository userRepository) {
+    public UserController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/{id}")
@@ -32,7 +37,17 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        return ResponseEntity.ok(userRepository.save(user));
+    public ResponseEntity<String> createUser(@RequestBody UserRequest userRequest) {
+        User user = new User();
+        user.setName(userRequest.name);
+        user.setPassword(passwordEncoder.encode(userRequest.password));
+        user.setRoles(Set.of("USER"));
+        userRepository.save(user);
+        return ResponseEntity.ok("User created.");
+    }
+
+    public static class UserRequest {
+        public String name;
+        public String password;
     }
 }
