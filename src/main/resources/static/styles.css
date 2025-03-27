@@ -13,21 +13,26 @@
 
 
 
-header{
-    justify-content: space-between;
-    color: var(--primary-color);
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr;
-    display: grid;
-
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: var(--accent-color);
+    padding: 15px 20px;
+    color: white;
 }
 
 #search{
-    padding: 5%;
+    margin: auto;
 }
 
 #logo{
-    max-width: 100px;
+    max-width: 120px;
+    padding: 5%;
+}
+
+#settings{
+    
 }
 
 body{
