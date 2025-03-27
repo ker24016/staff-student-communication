@@ -17,6 +17,12 @@ header{
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr;
     display: grid;
+
+}
+
+#logo{
+    max-width: 150%;
+    padding: 2%;
 }
 
 body{
