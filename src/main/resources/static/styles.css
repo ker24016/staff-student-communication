@@ -11,22 +11,23 @@
     --secondary-font: "Abel", sans-serif;
 }
 
-#logo {
-    size: 100px;
-}
+
 
 header{
     justify-content: space-between;
     color: var(--primary-color);
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr;
     display: grid;
 
 }
 
+#search{
+    padding: 5%;
+}
+
 #logo{
-    max-width: 150%;
-    padding: 2%;
+    max-width: 100px;
 }
 
 body{
