@@ -5,9 +5,12 @@ import com.byui.studentstaffcommunication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Set;
 
@@ -22,6 +25,11 @@ public class UserController {
     public UserController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<String> getSelf(Principal principal) {
+        return ResponseEntity.ok(principal.getName());
     }
 
     @GetMapping("/{id}")
