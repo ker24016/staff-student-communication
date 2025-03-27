@@ -1,32 +1,38 @@
 package com.byui.studentstaffcommunication.controller;
 
 import com.byui.studentstaffcommunication.model.User;
-import com.byui.studentstaffcommunication.model.UserRepository;
+import com.byui.studentstaffcommunication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    private UserRepository userRepository;
+    public UserRepository userRepository;
 
     @Autowired
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    @PostMapping(path="/add")
-    public @ResponseBody String addUser(@RequestParam String name, @RequestParam String email) {
-        User user = new User();
-        user.setUsername(name);
-        user.setEmail(email);
-        userRepository.save(user);
-        return "Saved";
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        return ResponseEntity.ok(userRepository.findById(id).orElse(null));
     }
 
-    @GetMapping(path="/all")
-    public @ResponseBody Iterable<User> getAllUsers() {
-        // This returns a JSON or XML with the users
-        return userRepository.findAll();
+    @GetMapping("/search")
+    public ResponseEntity<List<User>> searchByName(@RequestParam String name,
+                                                  @RequestParam(defaultValue = "0") int page,
+                                                  @RequestParam(defaultValue = "10") int size) {
+        return ResponseEntity.ok(userRepository.getAllByNameContainingIgnoreCase(name, Pageable.ofSize(size).withPage(page)));
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        return ResponseEntity.ok(userRepository.save(user));
     }
 }
