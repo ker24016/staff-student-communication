@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 
@@ -18,6 +19,8 @@ public class StudentStaffCommunicationApplication {
     private PostRepository postRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public static void main(String[] args) {
         SpringApplication.run(StudentStaffCommunicationApplication.class, args);
@@ -27,7 +30,7 @@ public class StudentStaffCommunicationApplication {
     public CommandLineRunner seedDatabase() {
         return args -> {
             if (userRepository.count() == 0) {
-                User user1 = new User("User1", "", new ArrayList<>());
+                User user1 = new User("user", passwordEncoder.encode("password"), new ArrayList<>());
                 userRepository.save(user1);
                 if (postRepository.count() == 0) {
                     postRepository.save(new Post("Hello, World!", "This is a test post.", user1, null, new ArrayList<>()));
