@@ -18,8 +18,8 @@ header {
     align-items: center;
     justify-content: space-evenly;
     background-color: var(--accent-color);
-    padding: 15px 20px;
     color: white;
+    grid-column: 1/4;
 }
 
 #search{
@@ -32,7 +32,7 @@ header {
 }
 
 #settings{
-    
+    padding-right: 2%;
 }
 
 body{
@@ -44,13 +44,23 @@ body{
 
 h1, h2 {
     font-family: var(--primary-font);
-    color: var(--text-dark);
+    color: var(--text-light);
+    
+    
 }
 
 p{
-    font-family: var(--secondary-font);
-    color: var(--text-dark);
+    font-family: var(--primary-font);
+    color: var(--text-light);
 }
 
-
+footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;            background-color: #333;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        grid-column: 1/4;
+}
 
