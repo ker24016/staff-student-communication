@@ -20,6 +20,8 @@ public class WebSecurityConfig {
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/user/create").permitAll()
                         .requestMatchers("/index.html").permitAll()
+                        .requestMatchers("/images/**").permitAll()
+                        .requestMatchers("/styles/**").permitAll()
                         .requestMatchers("/post/").authenticated()
                         .requestMatchers("/post/create").hasRole("USER")
                         .anyRequest().authenticated()
