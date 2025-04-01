@@ -39,7 +39,7 @@ public class StudentStaffCommunicationApplication {
                 }
             } else {
                 if (postRepository.count() == 0) {
-                    postRepository.save(new Post("Hello, World!", "This is a test post.", null, null, new ArrayList<>()));
+                    postRepository.save(new Post("Hello, World!", "This is a test post.", userRepository.findAll().getFirst(), null, new ArrayList<>()));
                 }
             }
         };
