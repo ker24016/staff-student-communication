@@ -1,0 +1,66 @@
+@import url("https: //fonts.googleapis.com/css2?family=Abel&family=Manrope:wght@200..800&display=swap");
+
+:root {
+    --primary-color: #023402;
+    --secondary-color: #E1B500 ;
+    --accent-color: #DCC670;
+    --extra-color: #404C93;
+    --text-dark: #ffffff;
+    --text-light: #020202;
+    --primary-font: "Manrope", Helvetica, sans-serif;
+    --secondary-font: "Abel", sans-serif;
+}
+
+
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: var(--accent-color);
+    color: white;
+    grid-column: 1/4;
+}
+
+#search{
+    margin: auto;
+}
+
+#logo{
+    max-width: 120px;
+    padding: 5%;
+}
+
+#settings{
+    padding-right: 2%;
+}
+
+body{
+    color: var(--primary-color);
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    display: grid;
+}
+
+h1, h2 {
+    font-family: var(--primary-font);
+    color: var(--text-light);
+    
+    
+}
+
+p{
+    font-family: var(--primary-font);
+    color: var(--text-light);
+}
+
+footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;            background-color: #333;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        grid-column: 1/4;
+}
+
