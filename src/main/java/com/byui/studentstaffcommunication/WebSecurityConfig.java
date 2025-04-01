@@ -22,6 +22,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/index.html").permitAll()
                         .requestMatchers("/images/**").permitAll()
                         .requestMatchers("/styles/**").permitAll()
+                        .requestMatchers("/favicon.ico").permitAll()
                         .requestMatchers("/post/").authenticated()
                         .requestMatchers("/post/create").hasRole("USER")
                         .anyRequest().authenticated()
