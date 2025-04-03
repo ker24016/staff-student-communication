@@ -1,5 +1,7 @@
 @import url("https: //fonts.googleapis.com/css2?family=Abel&family=Manrope:wght@200..800&display=swap");
-
+*{ 
+    box-sizing: border-box;
+}
 :root {
     --primary-color: #023402;
     --secondary-color: #E1B500 ;
@@ -19,7 +21,6 @@ header {
     justify-content: space-evenly;
     background-color: var(--accent-color);
     color: white;
-    grid-column: 1/4;
 }
 
 #search{
@@ -37,9 +38,6 @@ header {
 
 body{
     color: var(--primary-color);
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    display: grid;
 }
 
 h1, h2 {
